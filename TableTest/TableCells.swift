@@ -8,13 +8,33 @@
 
 import UIKit
 
-class UserCell: UITableViewCell, ConfigurableCell {
+class BaseCell: UITableViewCell, ConfigurableCell {
+    func configure(item: Base) {
+        imageView?.image = item.image
+        textLabel?.text = item.text
+        detailTextLabel?.text = item.detail
+    }
+}
+
+class Base {
+    let image: UIImage?
+    let text: String?
+    let detail: String?
+    
+    init(image: UIImage?, text: String?, detail: String?) {
+        self.image = image
+        self.text = text
+        self.detail = detail
+    }
+}
+
+
+class UserCell: BaseCell {
     @IBOutlet weak var avatarView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
 
-    func configure(data user: User) {
-        avatarView.image = UIImage(named: user.imageName)
-        userNameLabel.text = user.name
+    func configure(item user: User) {
+        super.configure(item: user)
     }
 }
 
@@ -22,7 +42,7 @@ class UserCell: UITableViewCell, ConfigurableCell {
 class MessageCell: UITableViewCell, ConfigurableCell {
     @IBOutlet weak var messageLabel: UILabel!
 
-    func configure(data message: String) {
+    func configure(item message: String) {
         messageLabel.text = message
     }
 }
@@ -31,7 +51,7 @@ class MessageCell: UITableViewCell, ConfigurableCell {
 class ImageCell: UITableViewCell, ConfigurableCell {
     @IBOutlet weak var pictureView: UIImageView!
 
-    func configure(data url: URL) {
+    func configure(item url: URL) {
         if let data = try? Data(contentsOf: url) {
             self.pictureView.image = UIImage(data: data)
         }
@@ -41,7 +61,7 @@ class ImageCell: UITableViewCell, ConfigurableCell {
 class WarningCell: UITableViewCell, ConfigurableCell {
     @IBOutlet weak var messageLabel: UILabel!
     
-    func configure(data message: String) {
+    func configure(item message: String) {
         messageLabel.text = message
     }
 }

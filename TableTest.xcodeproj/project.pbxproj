@@ -84,9 +84,9 @@
 		499C34D91F52B68D00000412 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				499C34DC1F52B6B300000412 /* Cells */,
 				499C350B1F56F2F900000412 /* CellConfigurator */,
 				499C34E51F52BDD600000412 /* ViewModel */,
-				499C34DC1F52B6B300000412 /* Cells */,
 				499C34DD1F52B6D200000412 /* TableViewController.swift */,
 			);
 			name = View;
