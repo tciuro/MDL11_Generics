@@ -9,8 +9,8 @@
 import UIKit
 
 protocol ConfigurableCell {
-    associatedtype DataType
-    func configure(data: DataType)
+    associatedtype ItemType
+    func configure(item: ItemType)
 }
 
 protocol CellConfigurator {
@@ -18,17 +18,17 @@ protocol CellConfigurator {
     func configure(cell: UIView)
 }
 
-class TableCellConfigurator<CellType: ConfigurableCell, DataType>: CellConfigurator where CellType.DataType == DataType, CellType: UITableViewCell {
+class TableCellConfigurator<CellType: ConfigurableCell, ItemType>: CellConfigurator where CellType.ItemType == ItemType, CellType: UITableViewCell {
     
     static var reuseId: String { return String(describing: CellType.self) }
     
-    let item: DataType
+    let item: ItemType
     
-    init(item: DataType) {
+    init(item: ItemType) {
         self.item = item
     }
     
     func configure(cell: UIView) {
-        (cell as! CellType).configure(data: item)
+        (cell as! CellType).configure(item: item)
     }
 }

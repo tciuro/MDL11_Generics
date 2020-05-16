@@ -8,7 +8,8 @@
 
 import UIKit
 
-struct User {
-    let name: String
-    let imageName: String
+class User: Base {
+    init(name: String, imageName: String) {
+        super.init(image: UIImage(named: imageName), text: name, detail: nil)
+    }
 }
