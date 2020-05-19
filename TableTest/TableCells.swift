@@ -8,8 +8,8 @@
 
 import UIKit
 
-class BaseCell: UITableViewCell, ConfigurableCell {
-    func configure(item: Base) {
+class BaseCell<ItemType: Base>: UITableViewCell, ConfigurableCell {
+    func configure(item: ItemType) {
         imageView?.image = item.image
         textLabel?.text = item.text
         detailTextLabel?.text = item.detail
@@ -29,39 +29,28 @@ class Base {
 }
 
 
-class UserCell: BaseCell {
-    @IBOutlet weak var avatarView: UIImageView!
-    @IBOutlet weak var userNameLabel: UILabel!
-
-    func configure(item user: User) {
+class UserCell: BaseCell<User> {
+    override func configure(item user: User) {
         super.configure(item: user)
     }
 }
 
 
-class MessageCell: UITableViewCell, ConfigurableCell {
-    @IBOutlet weak var messageLabel: UILabel!
-
-    func configure(item message: String) {
-        messageLabel.text = message
+class MessageCell: BaseCell<Base> {
+    override func configure(item: Base) {
+        super.configure(item: item)
     }
 }
 
 
-class ImageCell: UITableViewCell, ConfigurableCell {
-    @IBOutlet weak var pictureView: UIImageView!
-
-    func configure(item url: URL) {
-        if let data = try? Data(contentsOf: url) {
-            self.pictureView.image = UIImage(data: data)
-        }
+class ImageCell: BaseCell<Base> {
+    override func configure(item: Base) {
+            super.configure(item: item)
     }
 }
 
-class WarningCell: UITableViewCell, ConfigurableCell {
-    @IBOutlet weak var messageLabel: UILabel!
-    
-    func configure(item message: String) {
-        messageLabel.text = message
+class WarningCell: BaseCell<Base> {
+    override func configure(item: Base) {
+        super.configure(item: item)
     }
 }
